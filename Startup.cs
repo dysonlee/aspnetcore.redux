@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Web.Middleware;
 
 namespace Web
 {
@@ -36,6 +37,8 @@ namespace Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddSerilog();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             if (env.IsDevelopment())
             {
